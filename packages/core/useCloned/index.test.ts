@@ -93,4 +93,28 @@ describe('useCloned', () => {
 
     expect(cloned.value).toEqual(data.value)
   })
+
+  it('works with null', async () => {
+    const data = ref<string | null>(null)
+
+    const { cloned } = useCloned(data)
+
+    data.value = 'success'
+
+    await nextTick()
+
+    expect(cloned.value).toEqual(data.value)
+  })
+
+  it('works with undefined', async () => {
+    const data = ref<string | undefined>()
+
+    const { cloned } = useCloned(data)
+
+    data.value = 'success'
+
+    await nextTick()
+
+    expect(cloned.value).toEqual(data.value)
+  })
 })

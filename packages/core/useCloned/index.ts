@@ -33,6 +33,8 @@ export interface UseClonedReturn<T> {
 export type CloneFn<F, T = F> = (x: F) => T
 
 export function cloneFnJSON<T>(source: T): T {
+  if (source == null || typeof source !== 'object') // avoid unnecessary cloning
+    return source
   return JSON.parse(JSON.stringify(source))
 }
 
